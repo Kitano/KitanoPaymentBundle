@@ -2,19 +2,16 @@
 
 namespace Kitano\Bundle\PaymentBundle\Model;
 
-use Symfony\Component\HttpFoundation\ParameterBag;
-
 class Transaction
 {
-    const STATE_CANCELED = 1;
-    const STATE_FAILED = 2;
-    const STATE_EXPIRED = 3;
-    const STATE_NEW = 4;
-    const STATE_PENDING = 5;
-    const STATE_SUCCESS = 6;
-    const STATE_COMPLETE = 7;
-    const STATE_APPROVED = 8;
-    const STATE_APPROVING = 9;
+    const STATE_REFUSED = 201;
+    const STATE_BANK_BAN = 202;
+    const STATE_FILTERED = 203;
+    const STATE_NEW = 100;
+    const STATE_APPROVED = 101;
+    const STATE_FAILED = 204;
+    const STATE_INVALID_FORMAT = 400;
+    const STATE_SERVER_ERROR = 500;
 
     /* @var integer */
     private $id;
@@ -37,7 +34,7 @@ class Transaction
     /* @var string ISO 3166-1 alpha-2 */
     protected $country;
 
-    /* @var ParameterBag */
+    /* @var array */
     protected $extraData;
 
     /* @var integer */
@@ -52,16 +49,20 @@ class Transaction
     /* @var \DateTime */
     protected $updatedAt;
 
+    /* @var boolean */
+    protected $success = false;
+
 
     public function __construct($orderId, $amount, \DateTime $date, $currency, $country)
     {
-        $this->extraData = new ParameterBag();
+        $this->generateId();
         $this->setOrderId($orderId);
         $this->setAmount($amount);
         $this->setDate($date);
         $this->setCurrency($currency);
         $this->setCountry($country);
         $this->updatedAt = $this->createdAt = new \DateTime();
+        $this->setState(self::STATE_NEW);
     }
 
 
@@ -182,11 +183,11 @@ class Transaction
      */
     public function setExtraData(array $extraData)
     {
-        $this->extraData = new ParameterBag($extraData);
+        $this->extraData = $extraData;
     }
 
     /**
-     * @return ParameterBag
+     * @return array
      */
     public function getExtraData()
     {
@@ -255,5 +256,37 @@ class Transaction
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @return void
+     */
+    public function generateId()
+    {
+        $this->setTransactionId(uniqid('TR'));
+    }
+
+    /**
+     * @param boolean $success
+     */
+    public function setSuccess($success)
+    {
+        $this->success = (bool) $success;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getSuccess()
+    {
+        return $this->success;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isSuccess()
+    {
+        return $this->getSuccess();
     }
 }

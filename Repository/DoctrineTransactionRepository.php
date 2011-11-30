@@ -32,7 +32,7 @@ class DoctrineTransactionRepository implements TransactionRepositoryInterface
      */
     public function findByTransactionId($transactionId)
     {
-        return $this->getRepository('KitanoPaymentBundle:Transaction')->findBy(array(
+        return $this->getRepository('KitanoPaymentBundle:Transaction')->findOneBy(array(
             'transactionId' => $transactionId,
         ));
     }
@@ -44,10 +44,21 @@ class DoctrineTransactionRepository implements TransactionRepositoryInterface
      */
     public function findByOrderId($orderId)
     {
-        return $this->getRepository('KitanoPaymentBundle:Transaction')->findBy(array(
+        return $this->getRepository('KitanoPaymentBundle:AuthorizationTransaction')->findOneBy(array(
             'orderId' => $orderId,
         ));
     }
+
+    /**
+     * @param array $criteria
+     *
+     * @return CaptureTransaction[]
+     */
+    public function findCaptureBy(array $criteria)
+    {
+        return $this->getRepository('KitanoPaymentBundle:CaptureTransaction')->findBy($criteria);
+    }
+
 
     /**
      * @param Transaction $transaction
@@ -56,6 +67,7 @@ class DoctrineTransactionRepository implements TransactionRepositoryInterface
      */
     public function save(Transaction $transaction)
     {
+        $transaction->setUpdatedAt(new \DateTime());
         $this->entityManager->persist($transaction);
         $this->entityManager->flush();
     }

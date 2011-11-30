@@ -1,6 +1,6 @@
 <?php
 
-namespace Kitano\Bundle\PaymentBundle\Model\CreditCard;
+namespace Kitano\Bundle\PaymentBundle\Model;
 
 class CreditCard
 {

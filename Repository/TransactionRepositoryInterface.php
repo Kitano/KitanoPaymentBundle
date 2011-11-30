@@ -33,4 +33,11 @@ interface TransactionRepositoryInterface
      * @return void
      */
     public function save(Transaction $transaction);
+
+    /**
+     * @param array $criteria
+     *
+     * @return CaptureTransaction[]
+     */
+    public function findCaptureBy(array $criteria);
 }

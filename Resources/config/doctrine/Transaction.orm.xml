@@ -7,8 +7,8 @@
     <entity name="Kitano\Bundle\PaymentBundle\Model\Transaction" inheritance-type="JOINED" table="kitano_payment_transactions">
         <discriminator-column name="discr" type="string" />
         <discriminator-map>
-            <discriminator-mapping value="authorize" class="Kitano\Bundle\PaymentBundle\Model\CreditCard\AuthorizationTransaction" />
-            <discriminator-mapping value="capture" class="Kitano\Bundle\PaymentBundle\Model\CreditCard\CaptureTransaction" />
+            <discriminator-mapping value="authorize" class="Kitano\Bundle\PaymentBundle\Model\AuthorizationTransaction" />
+            <discriminator-mapping value="capture" class="Kitano\Bundle\PaymentBundle\Model\CaptureTransaction" />
         </discriminator-map>
 
         <id name="id" type="integer" column="id">
@@ -23,7 +23,8 @@
         <field name="country" column="tr_country" type="string" length="2" />
         <field name="extraData" column="tr_extra_data" type="array" nullable="true" />
         <field name="state" column="tr_state" type="smallint" />
-        <field name="message" column="tr_message" type="string" length="255" />
+        <field name="success" column="tr_success" type="boolean" />
+        <field name="message" column="tr_message" type="string" length="255" nullable="true" />
         <field name="createdAt" column="tr_created_at" type="datetime" />
         <field name="updatedAt" column="tr_updated_at" type="datetime" />
 

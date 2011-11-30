@@ -1,11 +1,18 @@
 <?php
 
-namespace Kitano\Bundle\PaymentBundle\Model\CreditCard;
+namespace Kitano\Bundle\PaymentBundle\Model;
 
 use Kitano\Bundle\PaymentBundle\Model\Transaction;
 
 class CaptureTransaction extends Transaction
 {
+    const STATE_UNKNOWN_ORDER = 401;
+    const STATE_EXPIRED = 402;
+    const STATE_ATTEMPT_LIMIT_REACHED = 403;
+    const STATE_ALREADY_APPROVED = 404;
+    const STATE_APPROVING = 301;
+    const STATE_BUSY = 302;
+
     /* @var AuthorizationTransaction */
     protected $baseTransaction;
 
