@@ -6,7 +6,7 @@
 
     <entity name="Kitano\Bundle\PaymentBundle\Model\CreditCard\CaptureTransaction" table="kitano_payment_capture_transactions">
 
-        <many-to-one field="baseTransaction" target-entity="Kitano\Bundle\PaymentBundle\Model\Transaction" />
+        <many-to-one field="baseTransaction" target-entity="Kitano\Bundle\PaymentBundle\Model\AuthorizationTransaction" />
 
     </entity>
 

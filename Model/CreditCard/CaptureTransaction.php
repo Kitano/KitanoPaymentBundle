@@ -6,7 +6,7 @@ use Kitano\Bundle\PaymentBundle\Model\Transaction;
 
 class CaptureTransaction extends Transaction
 {
-    /* @var Transaction */
+    /* @var AuthorizationTransaction */
     protected $baseTransaction;
 
     /**
@@ -20,15 +20,15 @@ class CaptureTransaction extends Transaction
     }
 
     /**
-     * @param Transaction $baseTransaction
+     * @param AuthorizationTransaction $baseTransaction
      */
-    public function setBaseTransaction(Transaction $baseTransaction)
+    public function setBaseTransaction(AuthorizationTransaction $baseTransaction)
     {
         $this->baseTransaction = $baseTransaction;
     }
 
     /**
-     * @return Transaction
+     * @return AuthorizationTransaction
      */
     public function getBaseTransaction()
     {
