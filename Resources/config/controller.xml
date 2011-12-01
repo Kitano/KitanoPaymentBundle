@@ -11,7 +11,7 @@
     <services>
 
         <!-- PaymentNotificationController -->
-        <service id="kitano_payment.controller.payment_notification.class" class="%kitano_payment.controller.payment_notification.class%" scope="request">
+        <service id="kitano_payment.controller.payment_notification" class="%kitano_payment.controller.payment_notification.class%" scope="request">
             <argument />
             <argument type="service" id="request" />
         </service>
