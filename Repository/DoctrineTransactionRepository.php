@@ -44,9 +44,16 @@ class DoctrineTransactionRepository implements TransactionRepositoryInterface
      */
     public function findByOrderId($orderId)
     {
-        return $this->getRepository('KitanoPaymentBundle:AuthorizationTransaction')->findOneBy(array(
-            'orderId' => $orderId,
-        ));
+        $qb = $this->entityManager->createQueryBuilder();
+        $qb
+            ->select('tr')
+            ->from('KitanoPaymentBundle:AuthorizationTransaction', 'tr')
+            ->where('tr.orderId = :orderId')
+            ->orderBy('tr.createdAt', 'DESC')
+            ->setMaxResults(1)
+            ->setParameter('orderId', $orderId);
+
+        return $qb->getQuery()->getSingleResult();
     }
 
     /**
