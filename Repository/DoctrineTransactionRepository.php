@@ -16,38 +16,66 @@ class DoctrineTransactionRepository implements TransactionRepositoryInterface
     }
 
     /**
-     * @param mixed $id
-     *
-     * @return Transaction|null
+     * {@inheritDoc}
      */
     public function find($id)
     {
-        return $this->getRepository('KitanoPaymentBundle:Transaction')->find($id);
+        return $this->_find('KitanoPaymentBundle:Transaction', $id);
     }
 
     /**
-     * @param mixed $transactionId
-     *
-     * @return Transaction|null
+     * {@inheritDoc}
      */
-    public function findByTransactionId($transactionId)
+    public function findAuthorization($id)
     {
-        return $this->getRepository('KitanoPaymentBundle:Transaction')->findOneBy(array(
-            'transactionId' => $transactionId,
-        ));
+        return $this->_find('KitanoPaymentBundle:AuthorizationTransaction', $id);
     }
 
     /**
-     * @param mixed $orderId
-     *
-     * @return Transaction|null
+     * {@inheritDoc}
+     */
+    public function findCapture($id)
+    {
+        return $this->_find('KitanoPaymentBundle:CaptureTransaction', $id);
+    }
+
+
+    private function _find($model, $id)
+    {
+        return $this->getRepository($model)->find($id);
+    }
+
+    /**
+     * {@inheritDoc}
      */
     public function findByOrderId($orderId)
+    {
+        return $this->_findByOrderId('KitanoPaymentBundle:Transaction', $orderId);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function findAuthorizationByOrderId($orderId)
+    {
+        return $this->_findByOrderId('KitanoPaymentBundle:AuthorizationTransaction', $orderId);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function findCaptureByOrderId($orderId)
+    {
+        return $this->_findByOrderId('KitanoPaymentBundle:CaptureTransaction', $orderId);
+    }
+
+
+    private function _findByOrderId($model, $orderId)
     {
         $qb = $this->entityManager->createQueryBuilder();
         $qb
             ->select('tr')
-            ->from('KitanoPaymentBundle:AuthorizationTransaction', 'tr')
+            ->from($model, 'tr')
             ->where('tr.orderId = :orderId')
             ->orderBy('tr.createdAt', 'DESC')
             ->setMaxResults(1)
@@ -57,15 +85,33 @@ class DoctrineTransactionRepository implements TransactionRepositoryInterface
     }
 
     /**
-     * @param array $criteria
-     *
-     * @return CaptureTransaction[]
+     * {@inheritDoc}
      */
-    public function findCaptureBy(array $criteria)
+    public function findBy(array $criteria)
     {
-        return $this->getRepository('KitanoPaymentBundle:CaptureTransaction')->findBy($criteria);
+        return $this->_findBy('KitanoPaymentBundle:Transaction', $criteria);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function findAuthorizationsBy(array $criteria)
+    {
+        return $this->_findBy('KitanoPaymentBundle:AuthorizationTransaction', $criteria);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function findCapturesBy(array $criteria)
+    {
+        return $this->_findBy('KitanoPaymentBundle:CaptureTransaction', $criteria);
+    }
+
+    private function _findBy($model, array $criteria)
+    {
+        return $this->getRepository($model)->findBy($criteria);
+    }
 
     /**
      * @param Transaction $transaction

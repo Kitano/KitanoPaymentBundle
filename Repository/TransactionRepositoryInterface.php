@@ -3,6 +3,8 @@
 namespace Kitano\Bundle\PaymentBundle\Repository;
 
 use Kitano\Bundle\PaymentBundle\Model\Transaction;
+use Kitano\Bundle\PaymentBundle\Model\AuthorizationTransaction;
+use Kitano\Bundle\PaymentBundle\Model\CaptureTransaction;
 
 interface TransactionRepositoryInterface
 {
@@ -14,11 +16,18 @@ interface TransactionRepositoryInterface
     public function find($id);
 
     /**
-     * @param mixed $transactionId
+     * @param mixed $id
      *
-     * @return Transaction|null
+     * @return AuthorizationTransaction|null
      */
-    public function findByTransactionId($transactionId);
+    public function findAuthorization($id);
+
+    /**
+     * @param mixed $id
+     *
+     * @return CaptureTransaction|null
+     */
+    public function findCapture($id);
 
     /**
      * @param mixed $orderId
@@ -26,6 +35,20 @@ interface TransactionRepositoryInterface
      * @return Transaction|null
      */
     public function findByOrderId($orderId);
+
+    /**
+     * @param mixed $orderId
+     *
+     * @return AuthorizationTransaction|null
+     */
+    public function findAuthorizationByOrderId($orderId);
+
+    /**
+     * @param mixed $orderId
+     *
+     * @return CaptureTransaction|null
+     */
+    public function findCaptureByOrderId($orderId);
 
     /**
      * @param Transaction $transaction
@@ -37,7 +60,21 @@ interface TransactionRepositoryInterface
     /**
      * @param array $criteria
      *
+     * @return Transaction[]
+     */
+    public function findBy(array $criteria);
+
+    /**
+     * @param array $criteria
+     *
+     * @return AuthorizationTransaction[]
+     */
+    public function findAuthorizationsBy(array $criteria);
+
+    /**
+     * @param array $criteria
+     *
      * @return CaptureTransaction[]
      */
-    public function findCaptureBy(array $criteria);
+    public function findCapturesBy(array $criteria);
 }
