@@ -38,6 +38,12 @@ class KitanoPaymentExtension extends Extension
         $paymentSystemServiceId = $config['service']['payment_system'];
         $notificationControllerDef = $container->getDefinition('kitano_payment.controller.payment_notification');
         $notificationControllerDef->replaceArgument(0, new Reference($paymentSystemServiceId));
+
+        if ($container->getParameter('kernel.debug')) {
+            $notificationControllerDef->addMethodCall('setLogger', array(
+                new Reference('logger'),
+            ));
+        }
     }
 
 }
