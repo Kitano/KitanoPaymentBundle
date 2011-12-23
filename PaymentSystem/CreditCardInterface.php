@@ -1,8 +1,8 @@
 <?php
 
-namespace Kitano\Bundle\PaymentBundle\PaymentSystem;
+namespace Kitano\PaymentBundle\PaymentSystem;
 
-use Kitano\Bundle\PaymentBundle\Model\CaptureTransaction;
+use Kitano\PaymentBundle\Model\CaptureTransaction;
 
 interface CreditCardInterface extends SimpleCreditCardInterface
 {

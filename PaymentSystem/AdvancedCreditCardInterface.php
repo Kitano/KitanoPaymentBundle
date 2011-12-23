@@ -1,9 +1,9 @@
 <?php
 
-namespace Kitano\Bundle\PaymentBundle\PaymentSystem;
+namespace Kitano\PaymentBundle\PaymentSystem;
 
-use Kitano\Bundle\PaymentBundle\Model\AuthorizationTransaction;
-use Kitano\Bundle\PaymentBundle\Model\Transaction;
+use Kitano\PaymentBundle\Model\AuthorizationTransaction;
+use Kitano\PaymentBundle\Model\Transaction;
 
 interface AdvancedCreditCardInterface extends CreditCardInterface
 {

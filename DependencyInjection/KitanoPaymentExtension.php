@@ -1,6 +1,6 @@
 <?php
 
-namespace Kitano\Bundle\PaymentBundle\DependencyInjection;
+namespace Kitano\PaymentBundle\DependencyInjection;
 
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\Definition\Processor;

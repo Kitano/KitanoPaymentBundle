@@ -1,10 +1,10 @@
 <?php
 
-namespace Kitano\Bundle\PaymentBundle\Repository;
+namespace Kitano\PaymentBundle\Repository;
 
-use Kitano\Bundle\PaymentBundle\Model\Transaction;
-use Kitano\Bundle\PaymentBundle\Model\AuthorizationTransaction;
-use Kitano\Bundle\PaymentBundle\Model\CaptureTransaction;
+use Kitano\PaymentBundle\Model\Transaction;
+use Kitano\PaymentBundle\Model\AuthorizationTransaction;
+use Kitano\PaymentBundle\Model\CaptureTransaction;
 
 interface TransactionRepositoryInterface
 {

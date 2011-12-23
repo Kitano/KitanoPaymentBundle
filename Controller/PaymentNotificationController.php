@@ -1,8 +1,8 @@
 <?php
 
-namespace Kitano\Bundle\PaymentBundle\Controller;
+namespace Kitano\PaymentBundle\Controller;
 
-use Kitano\Bundle\PaymentBundle\PaymentSystem\SimpleCreditCardInterface;
+use Kitano\PaymentBundle\PaymentSystem\SimpleCreditCardInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 

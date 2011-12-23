@@ -4,9 +4,9 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Kitano\Bundle\PaymentBundle\Model\CaptureTransaction" table="kitano_payment_capture_transactions">
+    <entity name="Kitano\PaymentBundle\Model\CaptureTransaction" table="kitano_payment_capture_transactions">
 
-        <many-to-one field="baseTransaction" target-entity="Kitano\Bundle\PaymentBundle\Model\AuthorizationTransaction" />
+        <many-to-one field="baseTransaction" target-entity="Kitano\PaymentBundle\Model\AuthorizationTransaction" />
 
     </entity>
 

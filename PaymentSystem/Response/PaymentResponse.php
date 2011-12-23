@@ -1,6 +1,6 @@
 <?php
 
-namespace Kitano\Bundle\PaymentBundle\PaymentSystem\Response;
+namespace Kitano\PaymentBundle\PaymentSystem\Response;
 
 class PaymentResponse
 {

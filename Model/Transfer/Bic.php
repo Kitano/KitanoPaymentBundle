@@ -1,6 +1,6 @@
 <?php
 
-namespace Kitano\Bundle\PaymentBundle\Model\Transfer;
+namespace Kitano\PaymentBundle\Model\Transfer;
 
 class Bic
 {

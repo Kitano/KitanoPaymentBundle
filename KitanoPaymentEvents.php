@@ -1,6 +1,6 @@
 <?php
 
-namespace Kitano\Bundle\PaymentBundle;
+namespace Kitano\PaymentBundle;
 
 final class KitanoPaymentEvents
 {

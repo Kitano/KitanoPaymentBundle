@@ -1,6 +1,6 @@
 <?php
 
-namespace Kitano\Bundle\PaymentBundle\Event;
+namespace Kitano\PaymentBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 

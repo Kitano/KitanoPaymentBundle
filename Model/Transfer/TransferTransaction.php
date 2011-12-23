@@ -1,8 +1,8 @@
 <?php
 
-namespace Kitano\Bundle\PaymentBundle\Model\Transfer;
+namespace Kitano\PaymentBundle\Model\Transfer;
 
-use Kitano\Bundle\PaymentBundle\Model\Transaction;
+use Kitano\PaymentBundle\Model\Transaction;
 
 class TransferTransaction extends Transaction
 {

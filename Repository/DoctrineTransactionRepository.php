@@ -1,9 +1,9 @@
 <?php
 
-namespace Kitano\Bundle\PaymentBundle\Repository;
+namespace Kitano\PaymentBundle\Repository;
 
 use Doctrine\ORM\EntityManager;
-use Kitano\Bundle\PaymentBundle\Model\Transaction;
+use Kitano\PaymentBundle\Model\Transaction;
 
 class DoctrineTransactionRepository implements TransactionRepositoryInterface
 {
