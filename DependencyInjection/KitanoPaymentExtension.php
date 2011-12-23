@@ -31,19 +31,60 @@ class KitanoPaymentExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        foreach (array('controller', 'repository') as $basename) {
+        foreach (array('repository') as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
 
-        $paymentSystemServiceId = $config['service']['payment_system'];
-        $notificationControllerDef = $container->getDefinition('kitano_payment.controller.payment_notification');
-        $notificationControllerDef->replaceArgument(0, new Reference($paymentSystemServiceId));
-
-        if ($container->getParameter('kernel.debug')) {
-            $notificationControllerDef->addMethodCall('setLogger', array(
-                new Reference('logger'),
-            ));
+        $this->remapParameters($config['service'], $container, array(
+            'payment_system'  => 'kitano_payment.payment_system'
+        ));
+    }
+    /**
+     * Dynamically remaps parameters from the config values
+     *
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param array            $namespaces
+     * @return void
+     */
+    protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
+    {
+        foreach ($namespaces as $ns => $map) {
+            if ($ns) {
+                if (!isset($config[$ns])) {
+                    continue;
+                }
+                $namespaceConfig = $config[$ns];
+            } else {
+                $namespaceConfig = $config;
+            }
+            if (is_array($map)) {
+                $this->remapParameters($namespaceConfig, $container, $map);
+            } else {
+                foreach ($namespaceConfig as $name => $value) {
+                    if (null !== $value) {
+                        $container->setParameter(sprintf($map, $name), $value);
+                    }
+                }
+            }
         }
     }
+
+    /**
+     *
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param array            $map
+     * @return void
+     */
+    protected function remapParameters(array $config, ContainerBuilder $container, array $map)
+    {
+        foreach ($map as $name => $paramName) {
+            if (isset($config[$name])) {
+                $container->setParameter($paramName, $config[$name]);
+            }
+        }
+    }
+
 
 }

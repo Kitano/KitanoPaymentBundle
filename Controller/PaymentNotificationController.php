@@ -5,44 +5,25 @@ namespace Kitano\PaymentBundle\Controller;
 use Kitano\PaymentBundle\PaymentSystem\SimpleCreditCardInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class PaymentNotificationController
+    extends Controller
 {
-    /* @var SimpleCreditCardInterface */
-    protected $creditCardSystem;
-
-    /* @var Request */
-    protected $request;
-
-
-    public function __construct(SimpleCreditCardInterface $creditCardSystem, Request $request)
+    public function __construct()
     {
-        $this->creditCardSystem = $creditCardSystem;
-        $this->request = $request;
     }
 
     public function paymentNotificationAction()
     {
-        $this->log(sprintf('Payment notification action with POST data : %s', print_r($this->request->request->all(), true)));
+        $paymentSystem = $this->get(
+            $this->container->getParameter('kitano_payment.payment_system')
+        );
+        $logger = $this->get('logger');
+        $logger->info(sprintf('*************************** Payment notification action with POST data : %s', print_r($this->getRequest()->request->all(), true)));
 
-        return $this->creditCardSystem->handlePaymentNotification($this->request);
-    }
-
-    /**
-     * @param LoggerInterface $logger
-     */
-    public function setLogger(LoggerInterface $logger)
-    {
-        $this->logger = $logger;
-    }
-
-    /**
-     * @param string $message
-     */
-    public function log($message)
-    {
-        if (null !== $this->logger) {
-            $this->logger->debug($message);
-        }
+        return $paymentSystem->handlePaymentNotification($this->getRequest());
     }
 }
