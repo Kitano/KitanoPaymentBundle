@@ -22,7 +22,7 @@ class PaymentNotificationController
             $this->container->getParameter('kitano_payment.payment_system')
         );
         $logger = $this->get('logger');
-        $logger->info(sprintf('*************************** Payment notification action with POST data : %s', print_r($this->getRequest()->request->all(), true)));
+        $logger->debug(sprintf('Payment notification action with POST data : %s', print_r($this->getRequest()->request->all(), true)));
 
         return $paymentSystem->handlePaymentNotification($this->getRequest());
     }
