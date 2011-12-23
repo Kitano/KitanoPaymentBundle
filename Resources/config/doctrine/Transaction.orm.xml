@@ -9,6 +9,7 @@
         <discriminator-map>
             <discriminator-mapping value="authorize" class="Kitano\PaymentBundle\Model\AuthorizationTransaction" />
             <discriminator-mapping value="capture" class="Kitano\PaymentBundle\Model\CaptureTransaction" />
+            <discriminator-mapping value="simple" class="Kitano\PaymentBundle\Model\Transaction" />
         </discriminator-map>
 
         <id name="id" type="integer" column="id">
