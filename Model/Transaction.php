@@ -4,23 +4,23 @@ namespace Kitano\PaymentBundle\Model;
 
 class Transaction
 {
-    const STATE_REFUSED = 201;
-    const STATE_BANK_BAN = 202;
-    const STATE_FILTERED = 203;
-    const STATE_NEW = 100;
-    const STATE_APPROVED = 101;
-    const STATE_FAILED = 204;
-    const STATE_INVALID_FORMAT = 400;
-    const STATE_SERVER_ERROR = 500;
+    const STATE_REFUSED = "refused";
+    const STATE_BANK_BAN = "bank_ban";
+    const STATE_FILTERED = "filtered";
+    const STATE_NEW = "new";
+    const STATE_APPROVED = "approved";
+    const STATE_FAILED = "failed";
+    const STATE_INVALID_FORMAT = "invalid_format";
+    const STATE_SERVER_ERROR = "server_error";
 
     /* @var integer */
     private $id;
 
     /* @var string */
-    protected $transactionId;
+    protected $transactionId = null;
 
     /* @var string */
-    protected $orderId;
+    protected $orderId = null;
 
     /* @var float */
     protected $amount = 0.0;
@@ -28,8 +28,8 @@ class Transaction
     /* @var string ISO 4217 */
     protected $currency;
 
-    /* @var string */
-    protected $date;
+    /* @var \DateTime */
+    protected $stateDate;
 
     /* @var string ISO 3166-1 alpha-2 */
     protected $country;
@@ -37,7 +37,7 @@ class Transaction
     /* @var array */
     protected $extraData;
 
-    /* @var integer */
+    /* @var string */
     protected $state;
 
     /* @var string */
@@ -55,10 +55,9 @@ class Transaction
 
     public function __construct($orderId, $amount, \DateTime $date, $currency, $country)
     {
-        $this->generateId();
         $this->setOrderId($orderId);
         $this->setAmount($amount);
-        $this->setDate($date);
+        $this->setStateDate($date);
         $this->setCurrency($currency);
         $this->setCountry($country);
         $this->updatedAt = $this->createdAt = new \DateTime();
@@ -99,19 +98,19 @@ class Transaction
     }
 
     /**
-     * @param \DateTime $date
+     * @param \DateTime $stateDate
      */
-    public function setDate(\DateTime $date)
+    public function setStateDate(\DateTime $stateDate)
     {
-        $this->date = $date;
+        $this->stateDate = $stateDate;
     }
 
     /**
      * @return \DateTime
      */
-    public function getDate()
+    public function getStateDate()
     {
-        return $this->date;
+        return $this->stateDate;
     }
 
     /**
@@ -211,15 +210,15 @@ class Transaction
     }
 
     /**
-     * @param int $state
+     * @param string $state
      */
     public function setState($state)
     {
-        $this->state = (int) $state;
+        $this->state = $state;
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getState()
     {
@@ -256,14 +255,6 @@ class Transaction
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * @return void
-     */
-    public function generateId()
-    {
-        $this->setTransactionId(uniqid('TR'));
     }
 
     /**

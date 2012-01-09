@@ -31,7 +31,7 @@ class KitanoPaymentExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        foreach (array('repository') as $basename) {
+        foreach (array('service') as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
 

@@ -6,12 +6,17 @@
 
     <parameters>
         <parameter key="kitano_payment.repository.transaction.class">Kitano\PaymentBundle\Repository\DoctrineTransactionRepository</parameter>
+        <parameter key="kitano_payment.payment_system_proxy.class">Kitano\PaymentBundle\PaymentSystem\PaymentSystemProxy</parameter>
     </parameters>
 
     <services>
 
         <service id="kitano_payment.repository.transaction" class="%kitano_payment.repository.transaction.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <service id="kitano_payment.payment_system_proxy" class="%kitano_payment.payment_system_proxy.class%">
+            <argument type="service" id="event_dispatcher" />
         </service>
 
     </services>

@@ -53,6 +53,11 @@ class DoctrineTransactionRepository implements TransactionRepositoryInterface
         return $this->_findByOrderId('KitanoPaymentBundle:Transaction', $orderId);
     }
 
+    public function findByTransactionIdAndStateDate($transactionId, \DateTime $stateDate)
+    {
+        return $this->_findByTransactionIdAndStateDate('KitanoPaymentBundle:Transaction', $transactionId, $stateDate);
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -82,6 +87,17 @@ class DoctrineTransactionRepository implements TransactionRepositoryInterface
             ->setParameter('orderId', $orderId);
 
         return $qb->getQuery()->getSingleResult();
+    }
+
+    protected function _findByTransactionIdAndStateDate($model, $transactionId, \DateTime $stateDate)
+    {
+        $qb = $this->entityManager->createQueryBuilder();
+        $qb ->select('tr')
+            ->from($model, 'tr')
+            ->where('tr.transactionId = :transactionId AND tr.stateDate > :stateDate')
+            ->setParameter('transactionId', $transactionId)
+            ->setParameter('stateDate', $stateDate);
+        return $qb->getQuery()->getResult();
     }
 
     /**

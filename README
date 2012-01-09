@@ -1,1 +1,35 @@
-test
+KitanoPaymentSipsBundle
+=======================
+
+This bundle symfony2 is used to manage payments. You have to use another payment bundle for each payment system.
+Kitano is just a namespace for bundles created by Kitpages (http://www.kitpages.fr) and Anonymation (www.anonymation.com).
+
+This bundle is still in alpha state and this documentation is only used by developpeurs to follow the evolution.
+
+Migrations
+==========
+- events name changed (constant names *AND* values), see KitanoPaymentEvents
+- every events of this bundle is of the type PaymentEvent that is defaultPreventable if needed
+- add a proxy on payment systems that automatically fires events
+
+- removed "tr_" prefix on column of the kitano_payment_transaction table
+- change "state" field in transaction table as a string
+    -    const STATE_REFUSED = 201;
+    -    const STATE_BANK_BAN = 202;
+    -    const STATE_FILTERED = 203;
+    -    const STATE_NEW = 100;
+    -    const STATE_APPROVED = 101;
+    -    const STATE_FAILED = 204;
+    -    const STATE_INVALID_FORMAT = 400;
+    -    const STATE_SERVER_ERROR = 500;
+
+    +    const STATE_REFUSED = "refused";
+    +    const STATE_BANK_BAN = "bank_ban";
+    +    const STATE_FILTERED = "filtered";
+    +    const STATE_NEW = "new";
+    +    const STATE_APPROVED = "approved";
+    +    const STATE_FAILED = "failed";
+    +    const STATE_INVALID_FORMAT = "invalid_format";
+    +    const STATE_SERVER_ERROR = "server_error";
+- change field "date" in transaction by a "stateDate"
+- no automatic transactionId generation anymore
