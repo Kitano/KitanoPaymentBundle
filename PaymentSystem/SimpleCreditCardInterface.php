@@ -21,6 +21,12 @@ interface SimpleCreditCardInterface
     public function handlePaymentNotification(Request $request);
 
     /**
+     * @param  Request  $request
+     * @return Response (a redirect to a page ok or ko)
+     */
+    public function handleBackToShop(Request $request);
+
+    /**
      * @param  Transaction $transaction
      * @return string
      */

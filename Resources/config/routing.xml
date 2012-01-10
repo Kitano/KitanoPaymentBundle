@@ -4,8 +4,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="kitano_payment_payment_notification" pattern="/kitano_payment/payment/notification">
-        <default key="_controller">KitanoPaymentBundle:PaymentNotification:paymentNotification</default>
+    <route id="kitano_payment_payment_notification" pattern="/payment-notification">
+        <default key="_controller">KitanoPaymentBundle:Payment:paymentNotification</default>
+    </route>
+
+    <route id="kitano_payment_back_to_shop" pattern="/back-to-shop">
+        <default key="_controller">KitanoPaymentBundle:Payment:backToShop</default>
     </route>
 
 </routes>

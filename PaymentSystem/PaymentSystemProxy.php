@@ -86,6 +86,26 @@ class PaymentSystemProxy
     }
 
     /**
+     * @param  Request  $request
+     * @return Response
+     */
+    public function handleBackToShop(Request $request)
+    {
+        $event = new PaymentEvent();
+        $event->set("request", $request);
+        $event->setPaymentSystem($this->paymentSystem);
+        $this->dispatcher->dispatch(KitanoPaymentEvents::ON_BACK_TO_SHOP, $event);
+
+        if (! $event->isDefaultPrevented()) {
+            $response = $this->paymentSystem->handleBackToShop($request);
+            $event->set("response", $response);
+        }
+
+        $this->dispatcher->dispatch(KitanoPaymentEvents::AFTER_BACK_TO_SHOP, $event);
+        return $event->get("response");
+    }
+
+    /**
      * @param  Transaction $transaction
      * @return string
      */

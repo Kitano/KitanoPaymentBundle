@@ -38,6 +38,9 @@ class KitanoPaymentExtension extends Extension
         $this->remapParameters($config['service'], $container, array(
             'payment_system'  => 'kitano_payment.payment_system'
         ));
+        $this->remapParametersNamespaces($config['config'], $container, array(
+            ''    => 'kitano_payment.config.%s',
+        ));
     }
     /**
      * Dynamically remaps parameters from the config values

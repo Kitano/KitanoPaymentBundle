@@ -7,6 +7,9 @@ final class KitanoPaymentEvents
     const ON_PAYMENT_NOTIFICATION = 'kitano_payment.event.on_payment_notification';
     const AFTER_PAYMENT_NOTIFICATION = 'kitano_payment.event.after_payment_notification';
 
+    const ON_BACK_TO_SHOP = 'kitano_payment.event.on_back_to_shop';
+    const AFTER_BACK_TO_SHOP = 'kitano_payment.event.after_back_to_shop';
+
     const ON_AUTHORIZE_AND_CAPTURE = 'kitano_payment.event.on_authorize_and_capture';
     const AFTER_AUTHORIZE_AND_CAPTURE = 'kitano_payment.event.after_authorize_and_capture';
 

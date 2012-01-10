@@ -9,13 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 
-class PaymentNotificationController
+class PaymentController
     extends Controller
 {
-    public function __construct()
-    {
-    }
-
     public function paymentNotificationAction()
     {
         $paymentSystem = $this->get(
@@ -25,5 +21,16 @@ class PaymentNotificationController
         $logger->debug(sprintf('Payment notification action with POST data : %s', print_r($this->getRequest()->request->all(), true)));
 
         return $paymentSystem->handlePaymentNotification($this->getRequest());
+    }
+
+    public function backToShopAction()
+    {
+        $paymentSystem = $this->get(
+            $this->container->getParameter('kitano_payment.payment_system')
+        );
+        $logger = $this->get('logger');
+        $logger->debug(sprintf('Payment notification action with POST data : %s', print_r($this->getRequest()->request->all(), true)));
+
+        return $paymentSystem->handleBackToShop($this->getRequest());
     }
 }

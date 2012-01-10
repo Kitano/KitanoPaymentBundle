@@ -25,6 +25,7 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('kitano_payment');
 
         $this->addServiceSection($rootNode);
+        $this->addConfigSection($rootNode);
 
         return $treeBuilder;
     }
@@ -46,6 +47,31 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('service')
                     ->children()
                         ->scalarNode('payment_system')->isRequired()->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    /**
+     * Parses the kitano_payment config section
+     * Example for yaml driver:
+     * kitano_payment:
+     *     config:
+     *         notification_url: "http://www.example.com/payment/payment-notification"
+     *         internal_back_to_shop_url: "https://www.example.com/payment/back-to-shop"
+     *         external_back_to_shop_url: "http://www.example.com/shop/back-to-shop"
+     *
+     * @param ArrayNodeDefinition $node
+     * @return void
+     */
+    private function addConfigSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('config')
+                    ->children()
+                        ->scalarNode('notification_url')->isRequired()->cannotBeEmpty()->end()
+                        ->scalarNode('internal_back_to_shop_url')->isRequired()->cannotBeEmpty()->end()
+                        ->scalarNode('external_back_to_shop_url')->isRequired()->cannotBeEmpty()->end()
                     ->end()
                 ->end()
             ->end();
