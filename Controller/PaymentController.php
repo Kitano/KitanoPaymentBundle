@@ -17,10 +17,12 @@ class PaymentController
         $paymentSystem = $this->get(
             $this->container->getParameter('kitano_payment.payment_system')
         );
+        $paymentSystemProxy = $this->get("kitano_payment.payment_system_proxy");
+        $paymentSystemProxy->setPaymentSystem($paymentSystem);
         $logger = $this->get('logger');
         $logger->debug(sprintf('Payment notification action with POST data : %s', print_r($this->getRequest()->request->all(), true)));
 
-        return $paymentSystem->handlePaymentNotification($this->getRequest());
+        return $paymentSystemProxy->handlePaymentNotification($this->getRequest());
     }
 
     public function backToShopAction()
@@ -28,9 +30,12 @@ class PaymentController
         $paymentSystem = $this->get(
             $this->container->getParameter('kitano_payment.payment_system')
         );
+        $paymentSystemProxy = $this->get("kitano_payment.payment_system_proxy");
+        $paymentSystemProxy->setPaymentSystem($paymentSystem);
+
         $logger = $this->get('logger');
         $logger->debug(sprintf('Payment notification action with POST data : %s', print_r($this->getRequest()->request->all(), true)));
 
-        return $paymentSystem->handleBackToShop($this->getRequest());
+        return $paymentSystemProxy->handleBackToShop($this->getRequest());
     }
 }
