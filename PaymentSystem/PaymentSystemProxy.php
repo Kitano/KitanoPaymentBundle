@@ -1,9 +1,13 @@
 <?php
+namespace Kitano\PaymentBundle\PaymentSystem;
+
 use Kitano\PaymentBundle\Model\Transaction;
 use Kitano\PaymentBundle\Event\PaymentEvent;
 use Kitano\PaymentBundle\KitanoPaymentEvents;
 use Kitano\PaymentBundle\PaymentSystem\SimpleCreditCardInterface;
 use Kitano\PaymentBundle\PaymentSystem\AdvancedCreditCardInterface;
+use Kitano\PaymentBundle\Model\AuthorizationTransaction;
+use Kitano\PaymentBundle\Model\CaptureTransaction;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,9 +37,9 @@ class PaymentSystemProxy
      */
     protected $paymentSystem = null;
     /**
-     * @param \SimpleCreditCardInterface $paymentSystem
+     * @param SimpleCreditCardInterface $paymentSystem
      */
-    public function setPaymentSystem($paymentSystem)
+    public function setPaymentSystem(SimpleCreditCardInterface $paymentSystem)
     {
         $this->paymentSystem = $paymentSystem;
     }
