@@ -3,6 +3,8 @@
 namespace Kitano\PaymentBundle\PaymentSystem;
 
 use Kitano\PaymentBundle\Model\Transaction;
+use Kitano\PaymentBundle\PaymentSystem\HandlePaymentResponse;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,13 +18,13 @@ interface SimpleCreditCardInterface
 
     /**
      * @param  Request  $request
-     * @return Response
+     * @return HandlePaymentResponse
      */
     public function handlePaymentNotification(Request $request);
 
     /**
      * @param  Request  $request
-     * @return Response (a redirect to a page ok or ko)
+     * @return HandlePaymentResponse (a redirect to a page ok or ko)
      */
     public function handleBackToShop(Request $request);
 

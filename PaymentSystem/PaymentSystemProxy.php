@@ -81,8 +81,9 @@ class PaymentSystemProxy
         $this->dispatcher->dispatch(KitanoPaymentEvents::ON_PAYMENT_NOTIFICATION, $event);
 
         if (! $event->isDefaultPrevented()) {
-            $response = $this->paymentSystem->handlePaymentNotification($request);
-            $event->set("response", $response);
+            $handleResponse = $this->paymentSystem->handlePaymentNotification($request);
+            $event->setTransaction($handleResponse->getTransaction());
+            $event->set("response", $handleResponse->getResponse());
         }
 
         $this->dispatcher->dispatch(KitanoPaymentEvents::AFTER_PAYMENT_NOTIFICATION, $event);
@@ -101,8 +102,9 @@ class PaymentSystemProxy
         $this->dispatcher->dispatch(KitanoPaymentEvents::ON_BACK_TO_SHOP, $event);
 
         if (! $event->isDefaultPrevented()) {
-            $response = $this->paymentSystem->handleBackToShop($request);
-            $event->set("response", $response);
+            $handleResponse = $this->paymentSystem->handleBackToShop($request);
+            $event->setTransaction($handleResponse->getTransaction());
+            $event->set("response", $handleResponse->getResponse());
         }
 
         $this->dispatcher->dispatch(KitanoPaymentEvents::AFTER_BACK_TO_SHOP, $event);
