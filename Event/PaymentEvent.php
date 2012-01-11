@@ -17,9 +17,9 @@ class PaymentEvent extends AbstractEvent
     protected $paymentSystem = null;
 
     /**
-     * @param Transaction $transaction
+     * @param null|Transaction $transaction
      */
-    public function setTransaction(Transaction $transaction)
+    public function setTransaction($transaction)
     {
         $this->transaction = $transaction;
     }

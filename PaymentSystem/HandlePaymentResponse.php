@@ -15,9 +15,13 @@ class HandlePaymentResponse
     protected $response = null;
 
 
+    /**
+     * @param null|Transaction $transaction
+     * @param null|Response $response
+     */
     public function __construct(
-        Transaction $transaction,
-        Response $response
+        $transaction = null,
+        $response = null
     )
     {
         $this->transaction = $transaction;
