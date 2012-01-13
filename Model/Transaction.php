@@ -12,6 +12,7 @@ class Transaction
     const STATE_FAILED = "failed";
     const STATE_INVALID_FORMAT = "invalid_format";
     const STATE_SERVER_ERROR = "server_error";
+    const STATE_CANCELED_BY_USER = "canceled_by_user";
 
     /* @var integer */
     private $id;
