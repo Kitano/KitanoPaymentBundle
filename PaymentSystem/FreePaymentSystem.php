@@ -89,7 +89,7 @@ class FreePaymentSystem
         $transaction->setExtraData($requestData->all());
         $this->transactionRepository->save($transaction);
 
-        $response = new RedirectResponse($this->externalBackToShopUrl, "302");
+        $response = new RedirectResponse($this->externalBackToShopUrl.'?transactionId='.$transaction->getId().'&orderId='.$transaction->getOrderId(), "302");
         return new HandlePaymentResponse($transaction, $response);
     }
 
