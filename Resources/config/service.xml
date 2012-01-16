@@ -7,6 +7,7 @@
     <parameters>
         <parameter key="kitano_payment.repository.transaction.class">Kitano\PaymentBundle\Repository\DoctrineTransactionRepository</parameter>
         <parameter key="kitano_payment.payment_system_proxy.class">Kitano\PaymentBundle\PaymentSystem\PaymentSystemProxy</parameter>
+        <parameter key="kitano_payment.free_payment_system.class">Kitano\PaymentBundle\PaymentSystem\FreePaymentSystem</parameter>
     </parameters>
 
     <services>
@@ -17,6 +18,15 @@
 
         <service id="kitano_payment.payment_system_proxy" class="%kitano_payment.payment_system_proxy.class%">
             <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="kitano_payment.free_payment_system" />
+        </service>
+
+        <service id="kitano_payment.free_payment_system" class="%kitano_payment.free_payment_system.class%">
+            <argument type="service" id="kitano_payment.repository.transaction" />
+            <argument type="service" id="logger" />
+            <argument type="service" id="templating" />
+            <argument>%kitano_payment.config.internal_back_to_shop_url%</argument>
+            <argument>%kitano_payment.config.external_back_to_shop_url%</argument>
         </service>
 
     </services>

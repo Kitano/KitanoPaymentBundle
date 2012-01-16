@@ -22,15 +22,20 @@ class PaymentSystemProxy
     /** @var null|\Symfony\Component\EventDispatcher\EventDispatcherInterface */
     protected $dispatcher = null;
 
+    /** @var \Kitano\PaymentBundle\PaymentSystem\SimpleCreditCardInterface|null */
+    protected $freePaymentSystem = null;
+
     /**
      * constructor
      * @param EventDispatcherInterface $dispatcher
      */
     public function __construct(
-        EventDispatcherInterface $dispatcher
+        EventDispatcherInterface $dispatcher,
+        SimpleCreditCardInterface $freePaymentSystem
     )
     {
         $this->dispatcher = $dispatcher;
+        $this->freePaymentSystem = $freePaymentSystem;
     }
     /**
      * @var SimpleCreditCardInterface
@@ -102,7 +107,11 @@ class PaymentSystemProxy
         $this->dispatcher->dispatch(KitanoPaymentEvents::ON_BACK_TO_SHOP, $event);
 
         if (! $event->isDefaultPrevented()) {
-            $handleResponse = $this->paymentSystem->handleBackToShop($request);
+            if ($request->request->get('transactionType', null) == "free") {
+                $handleResponse = $this->freePaymentSystem->handleBackToShop($request);
+            } else {
+                $handleResponse = $this->paymentSystem->handleBackToShop($request);
+            }
             $event->setTransaction($handleResponse->getTransaction());
             $event->set("response", $handleResponse->getResponse());
         }
@@ -123,7 +132,11 @@ class PaymentSystemProxy
         $this->dispatcher->dispatch(KitanoPaymentEvents::ON_RENDER_LINK, $event);
 
         if (! $event->isDefaultPrevented()) {
-            $html = $this->paymentSystem->renderLinkToPayment($transaction);
+            if (round($transaction->getAmount(), 2) == 0) {
+                $html = $this->freePaymentSystem->renderLinkToPayment($transaction);
+            } else {
+                $html = $this->paymentSystem->renderLinkToPayment($transaction);
+            }
             $event->set("html", $html);
         }
         $this->dispatcher->dispatch(KitanoPaymentEvents::ON_RENDER_LINK, $event);
