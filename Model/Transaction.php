@@ -53,14 +53,17 @@ class Transaction
     /* @var boolean */
     protected $success = false;
 
+    /* @var string */
+    protected $locale = null;
 
-    public function __construct($orderId, $amount, \DateTime $date, $currency, $country)
+    public function __construct($orderId, $amount, \DateTime $date, $currency, $country, $locale = null)
     {
         $this->setOrderId($orderId);
         $this->setAmount($amount);
         $this->setStateDate($date);
         $this->setCurrency($currency);
         $this->setCountry($country);
+        $this->setLocale($locale);
         $this->updatedAt = $this->createdAt = new \DateTime();
         $this->setState(self::STATE_NEW);
     }
@@ -160,6 +163,21 @@ class Transaction
     public function getCountry()
     {
         return $this->country;
+    }
+    /**
+     * @param string $locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->locale;
     }
 
     /**
