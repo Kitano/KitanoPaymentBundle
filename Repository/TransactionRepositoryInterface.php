@@ -2,9 +2,9 @@
 
 namespace Kitano\PaymentBundle\Repository;
 
-use Kitano\PaymentBundle\Model\Transaction;
-use Kitano\PaymentBundle\Model\AuthorizationTransaction;
-use Kitano\PaymentBundle\Model\CaptureTransaction;
+use Kitano\PaymentBundle\Entity\Transaction;
+use Kitano\PaymentBundle\Entity\AuthorizationTransaction;
+use Kitano\PaymentBundle\Entity\CaptureTransaction;
 
 interface TransactionRepositoryInterface
 {

@@ -3,7 +3,7 @@
 namespace Kitano\PaymentBundle\Repository;
 
 use Doctrine\ORM\EntityManager;
-use Kitano\PaymentBundle\Model\Transaction;
+use Kitano\PaymentBundle\Entity\Transaction;
 
 class DoctrineTransactionRepository implements TransactionRepositoryInterface
 {

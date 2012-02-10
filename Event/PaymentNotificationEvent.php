@@ -3,7 +3,7 @@
 namespace Kitano\PaymentBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use Kitano\PaymentBundle\Model\Transaction;
+use Kitano\PaymentBundle\Entity\Transaction;
 
 class PaymentNotificationEvent extends Event
 {

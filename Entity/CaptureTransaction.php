@@ -1,8 +1,8 @@
 <?php
 
-namespace Kitano\PaymentBundle\Model;
+namespace Kitano\PaymentBundle\Entity;
 
-use Kitano\PaymentBundle\Model\Transaction;
+use Kitano\PaymentBundle\Entity\Transaction;
 
 class CaptureTransaction extends Transaction
 {

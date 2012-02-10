@@ -1,7 +1,7 @@
 <?php
 namespace Kitano\PaymentBundle\PaymentSystem;
 
-use Kitano\PaymentBundle\Model\Transaction;
+use Kitano\PaymentBundle\Entity\Transaction;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;

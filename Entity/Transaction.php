@@ -1,6 +1,6 @@
 <?php
 
-namespace Kitano\PaymentBundle\Model;
+namespace Kitano\PaymentBundle\Entity;
 
 class Transaction
 {

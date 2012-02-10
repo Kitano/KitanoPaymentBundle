@@ -2,7 +2,7 @@
 
 namespace Kitano\PaymentBundle\PaymentSystem;
 
-use Kitano\PaymentBundle\Model\Transaction;
+use Kitano\PaymentBundle\Entity\Transaction;
 use Kitano\PaymentBundle\PaymentSystem\HandlePaymentResponse;
 
 use Symfony\Component\HttpFoundation\Request;

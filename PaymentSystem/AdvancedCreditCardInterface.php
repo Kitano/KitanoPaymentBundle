@@ -2,8 +2,8 @@
 
 namespace Kitano\PaymentBundle\PaymentSystem;
 
-use Kitano\PaymentBundle\Model\AuthorizationTransaction;
-use Kitano\PaymentBundle\Model\Transaction;
+use Kitano\PaymentBundle\Entity\AuthorizationTransaction;
+use Kitano\PaymentBundle\Entity\Transaction;
 
 interface AdvancedCreditCardInterface extends CreditCardInterface
 {

@@ -2,7 +2,7 @@
 
 namespace Kitano\PaymentBundle\PaymentSystem;
 
-use Kitano\PaymentBundle\Model\CaptureTransaction;
+use Kitano\PaymentBundle\Entity\CaptureTransaction;
 
 interface CreditCardInterface extends SimpleCreditCardInterface
 {

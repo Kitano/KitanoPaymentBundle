@@ -1,13 +1,13 @@
 <?php
 namespace Kitano\PaymentBundle\PaymentSystem;
 
-use Kitano\PaymentBundle\Model\Transaction;
+use Kitano\PaymentBundle\Entity\Transaction;
 use Kitano\PaymentBundle\Event\PaymentEvent;
 use Kitano\PaymentBundle\KitanoPaymentEvents;
 use Kitano\PaymentBundle\PaymentSystem\SimpleCreditCardInterface;
 use Kitano\PaymentBundle\PaymentSystem\AdvancedCreditCardInterface;
-use Kitano\PaymentBundle\Model\AuthorizationTransaction;
-use Kitano\PaymentBundle\Model\CaptureTransaction;
+use Kitano\PaymentBundle\Entity\AuthorizationTransaction;
+use Kitano\PaymentBundle\Entity\CaptureTransaction;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;

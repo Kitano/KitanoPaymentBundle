@@ -2,7 +2,7 @@
 
 namespace Kitano\PaymentBundle\Model\Transfer;
 
-use Kitano\PaymentBundle\Model\Transaction;
+use Kitano\PaymentBundle\Entity\Transaction;
 
 class TransferTransaction extends Transaction
 {

@@ -5,7 +5,7 @@ namespace Kitano\PaymentBundle\Event;
 use Symfony\Component\EventDispatcher\Event;
 
 use Kitano\PaymentBundle\Event\AbstractEvent;
-use Kitano\PaymentBundle\Model\Transaction;
+use Kitano\PaymentBundle\Entity\Transaction;
 use Kitano\PaymentBundle\PaymentSystem\SimpleCreditCardInterface;
 
 class PaymentEvent extends AbstractEvent
