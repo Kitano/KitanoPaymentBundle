@@ -1,5 +1,5 @@
 KitanoPaymentBundle
-=======================
+===================
 
 This bundle symfony2 is used to manage payments. You have to use another payment bundle for each payment system.
 Kitano is just a namespace for bundles created by Kitpages (http://www.kitpages.fr) and Anonymation (http://www.anonymation.com).
