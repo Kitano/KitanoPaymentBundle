@@ -7,7 +7,7 @@
     "license": "BSD",
     "authors": [
         {
-            "name": "Philippe Levan",
+            "name": "Philippe Le Van",
             "email": "philippe.levan@kitpages.fr",
             "homepage": "http://www.kitpages.fr"
         },
@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "symfony/framework-bundle": "2.1.*",
+        "symfony/framework-bundle": "~2.1",
         "doctrine/orm": ">=2.2.3,<2.4-dev"
     },
     "autoload": {
